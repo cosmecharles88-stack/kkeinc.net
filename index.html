@@ -163,6 +163,122 @@
     .serve-contractors::before { background-image: url('void-filling.jpg'); }
     .serve-residential::before { background-image: url('driveway-lift.jpg'); }
 
+    .project-slideshow {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2rem;
+      border: 1px solid #e2e8f0;
+      background: white;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+    }
+
+    .project-slide {
+      display: none;
+      grid-template-columns: 1.25fr 0.75fr;
+      min-height: 620px;
+    }
+
+    .project-slide.active {
+      display: grid;
+    }
+
+    .slide-image {
+      min-height: 620px;
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.10), rgba(15, 23, 42, 0.06)),
+        repeating-linear-gradient(45deg, #f8fafc, #f8fafc 10px, #eef2ff 10px, #eef2ff 20px);
+      border-right: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #475569;
+      font-weight: 800;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .slide-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem;
+    }
+
+    .slide-control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid #cbd5e1;
+      color: #0f172a;
+      font-size: 1.4rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .slide-control:hover {
+      background: white;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .slide-prev {
+      left: 1.25rem;
+    }
+
+    .slide-next {
+      right: 1.25rem;
+    }
+
+    .slide-dots {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.6rem;
+      z-index: 10;
+    }
+
+    .slide-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #cbd5e1;
+      border: none;
+      transition: background 0.2s ease, width 0.2s ease;
+    }
+
+    .slide-dot.active {
+      width: 32px;
+      background: #2563eb;
+    }
+
+    @media (max-width: 900px) {
+      .project-slide,
+      .project-slide.active {
+        display: block;
+        min-height: auto;
+      }
+
+      .slide-image {
+        min-height: 340px;
+        border-right: 0;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .slide-content {
+        padding: 2rem;
+      }
+    }
+
     .btn-primary {
       background: #2563eb;
       color: white;
@@ -204,12 +320,8 @@
 <body>
   <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/92 backdrop-blur">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-      <a href="#home" class="flex items-center gap-3">
-        <img src="KKE-Concrete-Lifting-Horizontal.jpg" alt="KKE Concrete Lifting Logo" style="height:60px; width:auto; object-fit:contain;">
-        <div class="leading-tight">
-          <div class="text-base font-black tracking-tight text-slate-900">KKE Concrete Lifting</div>
-          <div class="text-xs font-semibold uppercase tracking-widest text-slate-500">North Texas Concrete Restoration</div>
-        </div>
+      <a href="#home" class="flex items-center">
+        <img src="KKE-Concrete-Lifting-Horizontal.jpg" alt="KKE Concrete Lifting Logo" style="height:60px; width:auto; max-width:300px; object-fit:contain;">
       </a>
 
       <nav class="hidden items-center gap-8 text-sm lg:flex">
@@ -229,7 +341,7 @@
       <div class="mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:px-8 lg:py-28">
         <div>
           <div class="mb-6 inline-flex rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-bold text-blue-700">
-            Concrete lifting, stabilization, and void filling across North Texas
+            North Texas Concrete Restoration
           </div>
 
           <h1 class="max-w-3xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
@@ -367,60 +479,108 @@
           <a href="projects.html" class="btn-secondary w-fit">View Full Project Gallery</a>
         </div>
 
-        <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <article class="project-card overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-            <div class="image-placeholder h-64">Photo Placeholder<br>bridge-approach.jpg</div>
-            <div class="p-6">
+        <div class="project-slideshow mt-12" aria-label="Completed project slideshow">
+          <article class="project-slide active">
+            <div class="slide-image" style="background-image:url('bridge-approach.jpg');">
+              <div>Photo Placeholder<br>bridge-approach.jpg</div>
+            </div>
+            <div class="slide-content">
               <div class="text-xs font-black uppercase tracking-widest text-blue-600">Municipal / Infrastructure</div>
-              <h3 class="mt-2 text-xl font-black text-slate-950">Bridge Approach Stabilization</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">Restored approach elevation and ride quality without demolition or extended lane closures.</p>
+              <h3 class="mt-3 text-4xl font-black tracking-tight text-slate-950">Bridge Approach Stabilization</h3>
+              <p class="mt-5 text-lg leading-8 text-slate-600">Restored approach elevation and ride quality without demolition or extended lane closures.</p>
+              <div class="mt-8 rounded-2xl bg-slate-50 p-5">
+                <div class="text-sm font-black uppercase tracking-widest text-slate-500">Result</div>
+                <p class="mt-2 text-base font-semibold leading-7 text-slate-700">Improved ride quality while helping avoid full removal and replacement.</p>
+              </div>
             </div>
           </article>
 
-          <article class="project-card overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-            <div class="image-placeholder h-64">Photo Placeholder<br>longitudinal-joint.jpg</div>
-            <div class="p-6">
+          <article class="project-slide">
+            <div class="slide-image" style="background-image:url('longitudinal-joint.jpg');">
+              <div>Photo Placeholder<br>longitudinal-joint.jpg</div>
+            </div>
+            <div class="slide-content">
               <div class="text-xs font-black uppercase tracking-widest text-blue-600">Roadway Repair</div>
-              <h3 class="mt-2 text-xl font-black text-slate-950">Longitudinal Joint Correction</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">Corrected uneven joints to improve ride quality and reduce long-term pavement stress.</p>
+              <h3 class="mt-3 text-4xl font-black tracking-tight text-slate-950">Longitudinal Joint Correction</h3>
+              <p class="mt-5 text-lg leading-8 text-slate-600">Corrected uneven joints to improve ride quality and reduce long-term pavement stress.</p>
+              <div class="mt-8 rounded-2xl bg-slate-50 p-5">
+                <div class="text-sm font-black uppercase tracking-widest text-slate-500">Result</div>
+                <p class="mt-2 text-base font-semibold leading-7 text-slate-700">A cleaner driving surface with less disruption than replacement work.</p>
+              </div>
             </div>
           </article>
 
-          <article class="project-card overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-            <div class="image-placeholder h-64">Photo Placeholder<br>void-filling.jpg</div>
-            <div class="p-6">
+          <article class="project-slide">
+            <div class="slide-image" style="background-image:url('void-filling.jpg');">
+              <div>Photo Placeholder<br>void-filling.jpg</div>
+            </div>
+            <div class="slide-content">
               <div class="text-xs font-black uppercase tracking-widest text-blue-600">Stabilization</div>
-              <h3 class="mt-2 text-xl font-black text-slate-950">Void Filling & Subgrade Support</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">Filled underlying voids to prevent continued settlement and extend concrete service life.</p>
+              <h3 class="mt-3 text-4xl font-black tracking-tight text-slate-950">Void Filling & Subgrade Support</h3>
+              <p class="mt-5 text-lg leading-8 text-slate-600">Filled underlying voids to prevent continued settlement and extend concrete service life.</p>
+              <div class="mt-8 rounded-2xl bg-slate-50 p-5">
+                <div class="text-sm font-black uppercase tracking-widest text-slate-500">Result</div>
+                <p class="mt-2 text-base font-semibold leading-7 text-slate-700">Stabilized unsupported concrete before the problem became more expensive.</p>
+              </div>
             </div>
           </article>
 
-          <article class="project-card overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-            <div class="image-placeholder h-64">Photo Placeholder<br>bird-bath-drainage.jpg</div>
-            <div class="p-6">
+          <article class="project-slide">
+            <div class="slide-image" style="background-image:url('bird-bath-drainage.jpg');">
+              <div>Photo Placeholder<br>bird-bath-drainage.jpg</div>
+            </div>
+            <div class="slide-content">
               <div class="text-xs font-black uppercase tracking-widest text-blue-600">Drainage Correction</div>
-              <h3 class="mt-2 text-xl font-black text-slate-950">Bird Bath Correction</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">Corrected low spots to eliminate standing water and improve surface drainage.</p>
+              <h3 class="mt-3 text-4xl font-black tracking-tight text-slate-950">Bird Bath Correction</h3>
+              <p class="mt-5 text-lg leading-8 text-slate-600">Corrected low spots to eliminate standing water and improve surface drainage.</p>
+              <div class="mt-8 rounded-2xl bg-slate-50 p-5">
+                <div class="text-sm font-black uppercase tracking-widest text-slate-500">Result</div>
+                <p class="mt-2 text-base font-semibold leading-7 text-slate-700">Reduced ponding and helped restore proper surface performance.</p>
+              </div>
             </div>
           </article>
 
-          <article class="project-card overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-            <div class="image-placeholder h-64">Photo Placeholder<br>warehouse-foundation.jpg</div>
-            <div class="p-6">
+          <article class="project-slide">
+            <div class="slide-image" style="background-image:url('warehouse-foundation.jpg');">
+              <div>Photo Placeholder<br>warehouse-foundation.jpg</div>
+            </div>
+            <div class="slide-content">
               <div class="text-xs font-black uppercase tracking-widest text-blue-600">Commercial / Industrial</div>
-              <h3 class="mt-2 text-xl font-black text-slate-950">Warehouse Foundation Repair</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">Restored slab stability to maintain operational continuity and reduce structural risk.</p>
+              <h3 class="mt-3 text-4xl font-black tracking-tight text-slate-950">Warehouse Foundation Repair</h3>
+              <p class="mt-5 text-lg leading-8 text-slate-600">Restored slab stability to maintain operational continuity and reduce structural risk.</p>
+              <div class="mt-8 rounded-2xl bg-slate-50 p-5">
+                <div class="text-sm font-black uppercase tracking-widest text-slate-500">Result</div>
+                <p class="mt-2 text-base font-semibold leading-7 text-slate-700">Supported a critical commercial surface without major operational shutdown.</p>
+              </div>
             </div>
           </article>
 
-          <article class="project-card overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-            <div class="image-placeholder h-64">Photo Placeholder<br>tilt-wall-repair.jpg</div>
-            <div class="p-6">
+          <article class="project-slide">
+            <div class="slide-image" style="background-image:url('tilt-wall-repair.jpg');">
+              <div>Photo Placeholder<br>tilt-wall-repair.jpg</div>
+            </div>
+            <div class="slide-content">
               <div class="text-xs font-black uppercase tracking-widest text-blue-600">Specialty Commercial</div>
-              <h3 class="mt-2 text-xl font-black text-slate-950">Tilt Wall Stabilization</h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">Stabilized structural wall panels and supporting slabs without invasive reconstruction.</p>
+              <h3 class="mt-3 text-4xl font-black tracking-tight text-slate-950">Tilt Wall Stabilization</h3>
+              <p class="mt-5 text-lg leading-8 text-slate-600">Stabilized structural wall panels and supporting slabs without invasive reconstruction.</p>
+              <div class="mt-8 rounded-2xl bg-slate-50 p-5">
+                <div class="text-sm font-black uppercase tracking-widest text-slate-500">Result</div>
+                <p class="mt-2 text-base font-semibold leading-7 text-slate-700">Delivered a premium specialty repair for a high-value commercial application.</p>
+              </div>
             </div>
           </article>
+
+          <button class="slide-control slide-prev" type="button" aria-label="Previous project">‹</button>
+          <button class="slide-control slide-next" type="button" aria-label="Next project">›</button>
+
+          <div class="slide-dots" aria-label="Project slideshow navigation">
+            <button class="slide-dot active" type="button" aria-label="Show project 1"></button>
+            <button class="slide-dot" type="button" aria-label="Show project 2"></button>
+            <button class="slide-dot" type="button" aria-label="Show project 3"></button>
+            <button class="slide-dot" type="button" aria-label="Show project 4"></button>
+            <button class="slide-dot" type="button" aria-label="Show project 5"></button>
+            <button class="slide-dot" type="button" aria-label="Show project 6"></button>
+          </div>
         </div>
       </div>
     </section>
@@ -579,5 +739,27 @@
       </div>
     </div>
   </footer>
+  <script>
+    const slides = document.querySelectorAll('.project-slide');
+    const dots = document.querySelectorAll('.slide-dot');
+    const prevButton = document.querySelector('.slide-prev');
+    const nextButton = document.querySelector('.slide-next');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      currentSlide = (index + slides.length) % slides.length;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+
+    prevButton.addEventListener('click', () => showSlide(currentSlide - 1));
+    nextButton.addEventListener('click', () => showSlide(currentSlide + 1));
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => showSlide(index));
+    });
+  </script>
 </body>
 </html>
