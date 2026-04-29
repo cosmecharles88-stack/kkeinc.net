@@ -67,10 +67,29 @@
 
     .blue-panel {
       background:
-        linear-gradient(135deg, rgba(239, 246, 255, 0.95), rgba(255, 255, 255, 0.94)),
-        radial-gradient(circle at top right, rgba(37, 99, 235, 0.18), transparent 24rem);
-      border-top: 1px solid rgba(191, 219, 254, 0.85);
-      border-bottom: 1px solid rgba(191, 219, 254, 0.85);
+        linear-gradient(135deg, rgba(219, 234, 254, 0.9), rgba(255, 255, 255, 0.92)),
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.25), transparent 24rem);
+      border-top: 1px solid rgba(147, 197, 253, 0.9);
+      border-bottom: 1px solid rgba(147, 197, 253, 0.9);
+    }
+
+    /* stronger contrast helpers */
+    .section-white {
+      background: white;
+      border-top: 1px solid rgba(226, 232, 240, 0.8);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    .section-soft-blue {
+      background:
+        linear-gradient(180deg, rgba(239, 246, 255, 0.8), rgba(255,255,255,0.95));
+    }
+
+    .divider-line {
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(to right, transparent, rgba(148,163,184,0.5), transparent);
+      margin: 3rem 0;
     }
 
     .section-label {
@@ -462,7 +481,7 @@
       </div>
     </section>
 
-    <section id="solutions" class="relative bg-white">
+    <section id="solutions" class="section-white relative">
       <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <div class="mx-auto max-w-3xl text-center">
           <div class="section-label justify-center before:hidden">Who We Serve</div>
@@ -647,7 +666,7 @@
       </div>
     </section>
 
-    <section id="applications" class="relative bg-white">
+    <section id="applications" class="section-soft-blue relative">
       <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <div class="mx-auto max-w-3xl text-center">
           <div class="section-label justify-center before:hidden">Applications</div>
@@ -729,7 +748,7 @@
       </div>
     </section>
 
-    <section id="contact" class="relative bg-gradient-to-b from-white to-blue-50">
+    <section id="contact" class="section-white relative">
       <div class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-950 shadow-2xl">
           <div class="grid lg:grid-cols-2">
