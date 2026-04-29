@@ -82,6 +82,87 @@
       box-shadow: 0 22px 45px rgba(15, 23, 42, 0.12);
     }
 
+    .serve-photo {
+      min-height: 210px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      border: 1px solid #e2e8f0;
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(15, 23, 42, 0.08)),
+        repeating-linear-gradient(45deg, #f8fafc, #f8fafc 10px, #eef2ff 10px, #eef2ff 20px);
+    }
+
+    .serve-photo::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .serve-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.78), rgba(15, 23, 42, 0.12), rgba(255, 255, 255, 0.05));
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .serve-card:hover .serve-photo::before {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+
+    .serve-card:hover .serve-photo::after {
+      opacity: 1;
+    }
+
+    .serve-photo-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+
+    .serve-placeholder-text {
+      color: #475569;
+      font-weight: 800;
+      text-align: center;
+      margin: auto;
+      transition: opacity 0.25s ease;
+    }
+
+    .serve-card:hover .serve-placeholder-text {
+      opacity: 0;
+    }
+
+    .serve-overlay-text {
+      color: white;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      margin-top: auto;
+    }
+
+    .serve-card:hover .serve-overlay-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .serve-municipal::before { background-image: url('city-roadwork.jpg'); }
+    .serve-commercial::before { background-image: url('warehouse-slab.jpg'); }
+    .serve-contractors::before { background-image: url('void-filling.jpg'); }
+    .serve-residential::before { background-image: url('driveway-lift.jpg'); }
+
     .btn-primary {
       background: #2563eb;
       color: white;
@@ -216,26 +297,58 @@
         </div>
 
         <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          <a href="municipal.html" class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-2xl">🏛️</div>
+          <a href="municipal.html" class="serve-card rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+            <div class="serve-photo serve-municipal mb-5">
+              <div class="serve-photo-content">
+                <div class="serve-placeholder-text">Municipal Photo Placeholder<br>city-roadwork.jpg</div>
+                <div class="serve-overlay-text">
+                  <div class="text-xs font-black uppercase tracking-widest text-blue-200">Municipal Solutions</div>
+                  <div class="mt-1 text-lg font-black">Roadways, sidewalks, bridge approaches</div>
+                </div>
+              </div>
+            </div>
             <h3 class="text-xl font-black text-slate-950">Cities & Municipalities</h3>
             <p class="mt-3 text-sm leading-6 text-slate-600">Stretch maintenance budgets, reduce closures, and deliver visible public improvements.</p>
           </a>
 
-          <a href="commercial.html" class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-2xl">🏢</div>
+          <a href="commercial.html" class="serve-card rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+            <div class="serve-photo serve-commercial mb-5">
+              <div class="serve-photo-content">
+                <div class="serve-placeholder-text">Commercial Photo Placeholder<br>warehouse-slab.jpg</div>
+                <div class="serve-overlay-text">
+                  <div class="text-xs font-black uppercase tracking-widest text-blue-200">Commercial Solutions</div>
+                  <div class="mt-1 text-lg font-black">Slabs, tilt walls, premium surfaces</div>
+                </div>
+              </div>
+            </div>
             <h3 class="text-xl font-black text-slate-950">Commercial & Industrial</h3>
             <p class="mt-3 text-sm leading-6 text-slate-600">Repair slabs, parking areas, tilt walls, warehouse foundations, and premium applications.</p>
           </a>
 
-          <a href="contractors.html" class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-2xl">🏗️</div>
+          <a href="contractors.html" class="serve-card rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+            <div class="serve-photo serve-contractors mb-5">
+              <div class="serve-photo-content">
+                <div class="serve-placeholder-text">Contractor Photo Placeholder<br>void-filling.jpg</div>
+                <div class="serve-overlay-text">
+                  <div class="text-xs font-black uppercase tracking-widest text-blue-200">Contractor Support</div>
+                  <div class="mt-1 text-lg font-black">Void filling and schedule protection</div>
+                </div>
+              </div>
+            </div>
             <h3 class="text-xl font-black text-slate-950">General Contractors</h3>
             <p class="mt-3 text-sm leading-6 text-slate-600">Protect schedules with fast mobilization, void filling, slab stabilization, and clean scopes.</p>
           </a>
 
-          <a href="residential.html" class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-2xl">🏡</div>
+          <a href="residential.html" class="serve-card rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+            <div class="serve-photo serve-residential mb-5">
+              <div class="serve-photo-content">
+                <div class="serve-placeholder-text">Residential Photo Placeholder<br>driveway-lift.jpg</div>
+                <div class="serve-overlay-text">
+                  <div class="text-xs font-black uppercase tracking-widest text-blue-200">Residential Repairs</div>
+                  <div class="mt-1 text-lg font-black">Driveways, patios, pool decks</div>
+                </div>
+              </div>
+            </div>
             <h3 class="text-xl font-black text-slate-950">Homeowners</h3>
             <p class="mt-3 text-sm leading-6 text-slate-600">Lift driveways, patios, pool decks, sidewalks, garage aprons, porches, and stoops.</p>
           </a>
